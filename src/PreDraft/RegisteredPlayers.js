@@ -38,7 +38,7 @@ class RegisteredPlayers extends Component {
   }
 
   sortByName() {
-    if(this.state.sortState === 2){
+    if(this.state.sortState === 2) {
       this.reverseUsers()
       return
     }
@@ -50,7 +50,7 @@ class RegisteredPlayers extends Component {
   }
 
   sortByIGN() {
-    if(this.state.sortState === 3){
+    if(this.state.sortState === 3) {
       this.reverseUsers()
       return
     }
@@ -79,11 +79,10 @@ class RegisteredPlayers extends Component {
   }
 
   componentDidUpdate() {
-    if(this.props.me.length > 0
-      && this.state.data.length > 0
-      && this.state.sortState === 0){
+    if(this.state.data.length > 0
+      && this.state.sortState === 0) {
       let index = this.state.data.indexOf(this.props.me)
-      if( index > 0 ){
+      if(index > 0) {
         let temp = this.state.data.slice()
         let x = temp.splice(index, 1)
         temp = x.concat(temp)
