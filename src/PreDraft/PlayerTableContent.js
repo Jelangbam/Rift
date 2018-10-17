@@ -24,7 +24,14 @@ class PlayerTableContent extends Component {
     this.subscription && this.subscription.end()
   }
 
+  returnData() {
+    if(this.state.data.name){
+      this.props.addInfo(this.props.user, this.state.data);
+    }
+  }
+
   render() {
+    this.returnData()
     return (
       <tr>
         <td><PlayerInitials name={this.state.data.name}/></td>

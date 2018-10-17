@@ -40,8 +40,15 @@ class EditTableContent extends Component {
     })
   }
 
+  returnData() {
+    if(this.state.data.name){
+      this.props.addInfo(this.props.user, this.state.data);
+    }
+  }
+
   render() {
     console.log(this.state.data.selectedRoles)
+    this.returnData()
     return (
       <tr>
         <td><PlayerInitials name={this.state.data.name}/></td>
