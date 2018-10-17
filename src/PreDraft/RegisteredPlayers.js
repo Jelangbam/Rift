@@ -5,8 +5,6 @@ import { UserContext } from '../App'
 import EditTableContent from './EditTableContent'
 import PlayerTableContent from './PlayerTableContent'
 
-import {ArrowDownward, ArrowUpward} from '@material-ui/icons/'
-
 import './PlayerList.css'
 
 class RegisteredPlayers extends Component {
@@ -81,17 +79,13 @@ class RegisteredPlayers extends Component {
     })
   }
 
-  topifyMe() {
-    if(UserContext._currentValue._key.length > 0
+  componentDidUpdate() {
+    if(this.props.me.length > 0
       && this.state.data.length > 0
       && this.state.sortState === 0){
-      let me = ''
-      for(let i=0; i<UserContext._currentValue._key.length; i++){
-        me += UserContext._currentValue._key[i]
-      }
-      let temp = this.state.data.slice()
-      let index = temp.indexOf(me)
+      let index = this.state.data.indexOf(this.props.me)
       if( index > 0 ){
+        let temp = this.state.data.slice()
         let x = temp.splice(index, 1)
         temp = x.concat(temp)
         this.setState({
@@ -99,10 +93,15 @@ class RegisteredPlayers extends Component {
           sortState: 1
         })
       }
+      else if(index === 0){
+        this.setState({
+          sortState: 1
+        })
+      }
     }
   }
 
-  render () {
+  render() {
     return (
       <div className='playerListDisplay'>
         <table className='tableContainer'>
@@ -117,7 +116,6 @@ class RegisteredPlayers extends Component {
             </tr>
           </thead>
           <tbody>
-          {this.topifyMe()}
             {this.state.data.map((user) => {
               return (
                 <UserContext.Consumer key={user}>
@@ -136,4 +134,8 @@ class RegisteredPlayers extends Component {
   }
 }
 
-export default RegisteredPlayers
+export default React.forwardRef((props, ref) => (
+  <UserContext.Consumer>
+  {(me) => <RegisteredPlayers {...props} me={me._key} ref={ref} />}
+  </UserContext.Consumer>
+))

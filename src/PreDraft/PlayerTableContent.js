@@ -20,18 +20,17 @@ class PlayerTableContent extends Component {
     })
   }
 
-  componentWillUnmount() {
-    this.subscription && this.subscription.end()
-  }
-
-  returnData() {
+  componentDidUpdate() {
     if(this.state.data.name){
       this.props.addInfo(this.props.user, this.state.data);
     }
   }
 
+  componentWillUnmount() {
+    this.subscription && this.subscription.end()
+  }
+
   render() {
-    this.returnData()
     return (
       <tr>
         <td><PlayerInitials name={this.state.data.name}/></td>
