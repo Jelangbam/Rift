@@ -12,8 +12,7 @@ class RegisteredPlayers extends Component {
     super(props)
     this.state = {
       data: [],
-      sortState: 0,
-      reversed: false
+      sortState: 0
     }
     this.userMap = new Map()
     this.addInfo = this.addInfo.bind(this)
